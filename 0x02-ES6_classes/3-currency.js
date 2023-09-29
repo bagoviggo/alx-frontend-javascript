@@ -25,7 +25,7 @@ export default class Currency {
 
   _validateAndSet(property, value) {
     if (typeof value === 'string') {
-      this['_' + property] = value;
+      this[`_${property}`] = value;
     } else {
       throw new TypeError(`${property.charAt(0).toUpperCase() + property.slice(1)} must be a string`);
     }
@@ -35,4 +35,3 @@ export default class Currency {
     return `${this.name} (${this.code})`;
   }
 }
-

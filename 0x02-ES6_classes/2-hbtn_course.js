@@ -1,53 +1,53 @@
-class HolbertonCourse {
+export default class HolbertonCourse {
   constructor(name, length, students) {
-    this._name = this._validateString(name, 'name');
-    this._length = this._validateNumber(length, 'length');
-    this._students = this._validateArray(students, 'students');
+    this._name = '';
+    this._length = 0;
+    this._students = [];
+
+    this.name = name;
+    this.length = length;
+    this.students = students;
   }
 
+  // Getter for name
   get name() {
     return this._name;
   }
 
+  // Setter for name
   set name(newName) {
-    this._name = this._validateString(newName, 'name');
+    if (typeof newName === 'string') {
+      this._name = newName;
+    } else {
+      throw new TypeError('Name must be a string');
+    }
   }
 
+  // Getter for length
   get length() {
     return this._length;
   }
 
+  // Setter for length
   set length(newLength) {
-    this._length = this._validateNumber(newLength, 'length');
+    if (typeof newLength === 'number') {
+      this._length = newLength;
+    } else {
+      throw new TypeError('Length must be a number');
+    }
   }
 
+  // Getter for students
   get students() {
     return this._students;
   }
 
+  // Setter for students
   set students(newStudents) {
-    this._students = this._validateArray(newStudents, 'students');
-  }
-
-  static _validateString(value, propertyName) {
-    if (typeof value !== 'string') {
-      throw new TypeError(`${propertyName.charAt(0).toUpperCase() + propertyName.slice(1)} must be a string`);
+    if (Array.isArray(newStudents) && newStudents.every((student) => typeof student === 'string')) {
+      this._students = newStudents;
+    } else {
+      throw new TypeError('Students must be an array of strings');
     }
-    return value;
-  }
-
-  static _validateNumber(value, propertyName) {
-    if (typeof value !== 'number') {
-      throw new TypeError(`${propertyName.charAt(0).toUpperCase() + propertyName.slice(1)} must be a number`);
-    }
-    return value;
-  }
-
-  static _validateArray(value, propertyName) {
-    if (!Array.isArray(value)) {
-      throw new TypeError(`${propertyName.charAt(0).toUpperCase() + propertyName.slice(1)} must be an array`);
-    }
-    return value;
   }
 }
-export default HolbertonCourse;

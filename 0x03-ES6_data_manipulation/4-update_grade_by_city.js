@@ -1,15 +1,15 @@
 export default function updateStudentGradeByCity(students, city, newGrades) {
+  // Ensure students is an array, city is a string, and newGrades is an array.
   if (!Array.isArray(students) || typeof city !== 'string' || !Array.isArray(newGrades)) {
     return [];
   }
 
-  return students.map((student) => {
-    if (student.location === city) {
-      const grade = newGrades.find((g) => g.id === student.id);
-      if (grade && typeof grade.grade === 'number') {
-        return { ...student, grade: grade.grade };
-      }
-    }
-    return student;
-  });
+  // Use filter to select students in the specified city and map to update their grades.
+  return students
+    .filter((student) => student.location === city)
+    .map((student) => {
+      const gradeObj = newGrades.find((grade) => grade.studentId === student.id);
+      const grade = gradeObj ? gradeObj.grade : 'N/A';
+      return { ...student, grade };
+    });
 }

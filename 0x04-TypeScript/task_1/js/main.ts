@@ -1,44 +1,25 @@
-// main.ts
-
-// Define the Teacher class
-class Teacher {
+// Define the Teacher interface
+interface Teacher {
   firstName: string;
   lastName: string;
-  fullTimeEmployee: boolean = true; // This attribute is always defined
-  yearsOfExperience?: number; // This attribute is optional
+  fullTimeEmployee: boolean;
   location: string;
-
-  constructor({
-    firstName,
-    lastName,
-    location,
-    ...restAttributes
-  }: {
-    firstName: string;
-    lastName: string;
-    location: string;
-    [key: string]: any; // Allow any additional attributes to be added
-  }) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.location = location;
-
-    // Assign any additional attributes dynamically
-    for (const key in restAttributes) {
-      if (restAttributes.hasOwnProperty(key)) {
-        this[key] = restAttributes[key];
-      }
-    }
-  }
+  [key: string]: any; // Allow any additional attributes to be added
 }
 
-// Create a Teacher object with initial and additional attributes
-const teacher3: Teacher = {
+// Define the Directors interface that extends Teacher
+interface Directors extends Teacher {
+  numberOfReports: number;
+}
+
+// Create a director object using the Directors interface
+const director1: Directors = {
   firstName: 'John',
-  fullTimeEmployee: false,
   lastName: 'Doe',
   location: 'London',
-  contract: false, // Adding an additional attribute
+  fullTimeEmployee: true,
+  numberOfReports: 17,
 };
 
-console.log(teacher3);
+console.log(director1);
+

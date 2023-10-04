@@ -1,16 +1,23 @@
-export default function cleanSet(set, startString) {
-  let result = '';
+/* eslint-disable */
+
+const cleanSet = (set, startString) => {
+  const str = [];
+
+  if (
+    typeof set !== 'object' ||
+    typeof startString !== 'string' ||
+    startString.length === 0
+  ) {
+    return '';
+  }
 
   for (const item of set) {
-    if (startString && item.startsWith(startString)) {
-      result += `${item.slice(startString.length)}-`;
+    if (item && item.startsWith(startString)) {
+      str.push(item.slice(startString.length));
     }
   }
 
-  // Remove the trailing hyphen if it exists
-  if (result.endsWith('-')) {
-    result = result.slice(0, -1);
-  }
+  return str.join('-');
+};
 
-  return result;
-}
+export default cleanSet;

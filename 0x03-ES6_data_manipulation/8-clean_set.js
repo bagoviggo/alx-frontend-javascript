@@ -1,8 +1,16 @@
 export default function cleanSet(set, startString) {
-  if (!(set instanceof Set) || typeof startString !== 'string') {
-    throw new TypeError('Invalid input types');
+  let result = '';
+
+  for (const item of set) {
+    if (item.startsWith(startString)) {
+      result += `${item.slice(startString.length)}-`;
+    }
   }
 
-  const filteredValues = [...set].filter(value => value.startsWith(startString));
-  return filteredValues.join('-');
+  // Remove the trailing hyphen if it exists
+  if (result.endsWith('-')) {
+    result = result.slice(0, -1);
+  }
+
+  return result;
 }

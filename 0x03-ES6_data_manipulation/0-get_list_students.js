@@ -3,4 +3,3 @@ export default () => [
   { firstName: 'James', id: 2, location: 'Columbia' },
   { firstName: 'Serena', id: 5, location: 'San Francisco' },
 ];
-
